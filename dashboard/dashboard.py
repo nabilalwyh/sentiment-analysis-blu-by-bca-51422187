@@ -210,7 +210,7 @@ def tampilkan_wordcloud(data_path, sentiment_value, label=""):
 
 # Halaman sidebar
 with st.sidebar:
-    st.image("../image/blu.png")  # Ganti path sesuai lokasi logo kamu
+    st.image("image/blu.png")  # Ganti path sesuai lokasi logo kamu
 
     # Navigasi di sidebar
     page = st.selectbox("Navigasi", ["Tentang blu", "Analisis Data Ulasan", "Analisis Sentimen"])
@@ -231,7 +231,7 @@ if page == "Tentang blu":
         col1, col2 = st.columns([2, 3])  # kolom kiri lebih kecil dari kanan
 
         with col1:
-            st.image("../image/bluSaving.png", use_column_width=True)  # ganti dengan path yang sesuai
+            st.image("image/bluSaving.png", use_column_width=True)  # ganti dengan path yang sesuai
 
         with col2:
             st.subheader("bluSaving")
@@ -242,7 +242,7 @@ if page == "Tentang blu":
         col1, col2 = st.columns([2, 3])  # kolom kiri lebih kecil dari kanan
 
         with col1:
-            st.image("../image/bluGether.png", use_column_width=True)  # ganti dengan path yang sesuai
+            st.image("image/bluGether.png", use_column_width=True)  # ganti dengan path yang sesuai
 
         with col2:
             st.subheader("bluGether")
@@ -254,7 +254,7 @@ if page == "Tentang blu":
         col1, col2 = st.columns([2, 3])  # kolom kiri lebih kecil dari kanan
 
         with col1:
-            st.image("../image/bluDeposit.png", use_column_width=True)  # ganti dengan path yang sesuai
+            st.image("image/bluDeposit.png", use_column_width=True)  # ganti dengan path yang sesuai
 
         with col2:
             st.subheader("bluDeposit")
