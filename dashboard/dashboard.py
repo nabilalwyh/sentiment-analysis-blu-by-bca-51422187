@@ -7,8 +7,6 @@ from wordcloud import WordCloud
 import re
 import emoji
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
 from nltk.corpus import stopwords
 import string
 from nltk.tokenize import word_tokenize
@@ -16,6 +14,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.base import BaseEstimator
 import joblib
 sns.set(style='dark')
+# Unduh hanya jika belum ada
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+    nltk.download('stopwords')
 
 
 # ------------------------------------------------------- Class Analisis Sentimen -------------------------------------------------------
