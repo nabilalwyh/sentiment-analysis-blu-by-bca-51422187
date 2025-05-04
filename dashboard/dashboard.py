@@ -14,17 +14,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.base import BaseEstimator
 import joblib
 sns.set(style='dark')
-# Unduh hanya jika belum ada
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
-
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('stopwords')
-
 
 
 # ------------------------------------------------------- Class Analisis Sentimen -------------------------------------------------------
@@ -102,23 +91,9 @@ class SentimentAnalyzer:
         return ' '.join(hasil)
 
     def tokenizing_text(self, text: str) -> list:
-    # Pastikan resource punkt ada
-        try:
-            nltk.data.find('tokenizers/punkt')
-        except LookupError:
-            nltk.download('punkt')
-
-        # Gunakan Punkt tokenizer secara eksplisit
-        from nltk.tokenize import PunktSentenceTokenizer, word_tokenize
-
-        tokenizer = PunktSentenceTokenizer()
-        tokens = []
-        for sentence in tokenizer.tokenize(text):
-            tokens.extend(word_tokenize(sentence))
-        
+        tokens = re.findall(r'\b\w+\b', text.lower())
         tokens = [word for word in tokens if word not in listStopwords]
         return tokens
-
 
     def proses_teks_input(self, text: str, show_log: bool = False) -> str:
         if show_log: print(f"Teks asli: {text}")
