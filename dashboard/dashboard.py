@@ -7,6 +7,8 @@ from wordcloud import WordCloud
 import re
 import emoji
 import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 import string
 from nltk.tokenize import word_tokenize
