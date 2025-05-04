@@ -18,8 +18,13 @@ sns.set(style='dark')
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt_tab')
+    nltk.download('punkt')
+
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
     nltk.download('stopwords')
+
 
 
 # ------------------------------------------------------- Class Analisis Sentimen -------------------------------------------------------
