@@ -7,8 +7,6 @@ from wordcloud import WordCloud
 import re
 import emoji
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
 from nltk.corpus import stopwords
 import string
 from nltk.tokenize import word_tokenize
@@ -93,6 +91,8 @@ class SentimentAnalyzer:
         return ' '.join(hasil)
 
     def tokenizing_text(self, text: str) -> list:
+        nltk.download('punkt')
+        nltk.download('stopwords')
         tokens = word_tokenize(text)
         tokens = [word for word in tokens if word not in listStopwords]
         return tokens
