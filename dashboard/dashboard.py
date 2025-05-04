@@ -102,11 +102,23 @@ class SentimentAnalyzer:
         return ' '.join(hasil)
 
     def tokenizing_text(self, text: str) -> list:
-        nltk.download('punkt')
-        nltk.download('stopwords')
-        tokens = word_tokenize(text)
+    # Pastikan resource punkt ada
+        try:
+            nltk.data.find('tokenizers/punkt')
+        except LookupError:
+            nltk.download('punkt')
+
+        # Gunakan Punkt tokenizer secara eksplisit
+        from nltk.tokenize import PunktSentenceTokenizer, word_tokenize
+
+        tokenizer = PunktSentenceTokenizer()
+        tokens = []
+        for sentence in tokenizer.tokenize(text):
+            tokens.extend(word_tokenize(sentence))
+        
         tokens = [word for word in tokens if word not in listStopwords]
         return tokens
+
 
     def proses_teks_input(self, text: str, show_log: bool = False) -> str:
         if show_log: print(f"Teks asli: {text}")
