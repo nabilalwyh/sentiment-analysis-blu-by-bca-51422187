@@ -266,7 +266,7 @@ if page == "Tentang blu":
 elif page == "Analisis Data Ulasan":
     st.title("📋 Ulasan Pengguna Aplikasi blu")
 
-    data_path = "../data/data_model.csv"
+    data_path = "data/data_model.csv"
     data_model = load_data(data_path)
 
     jumlah_data = st.slider("Tampilkan berapa banyak ulasan?", min_value=5, max_value=50, value=10, step=5)
@@ -281,7 +281,7 @@ elif page == "Analisis Data Ulasan":
 
     st.title("📊 Analisis Sentimen Ulasan")
 
-    data_path = "../data/ulasan_sentimen.csv"
+    data_path = "data/ulasan_sentimen.csv"
 
     # Distribusi Sentimen (Lexicon-based
     st.header("Distribusi Sentimen (Lexicon-based)")
@@ -342,8 +342,8 @@ elif page == "Analisis Data Ulasan":
 # ------------- PAGE 3: ANALISIS DATA ULASAN -------------
 elif page == "Analisis Sentimen":
     # Load model dan vectorizer
-    model = joblib.load("../model/model.joblib")
-    vectorizer = joblib.load("../model/tfidf_vectorizer.joblib")
+    model = joblib.load("model/model.joblib")
+    vectorizer = joblib.load("model/tfidf_vectorizer.joblib")
 
     # Inisialisasi analyzer
     analyzer = SentimentAnalyzer(vectorizer, model)
