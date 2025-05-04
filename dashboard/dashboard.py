@@ -7,6 +7,9 @@ from wordcloud import WordCloud
 import re
 import emoji
 import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+from nltk.corpus import stopwords
 import string
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -16,11 +19,6 @@ sns.set(style='dark')
 
 
 # ------------------------------------------------------- Class Analisis Sentimen -------------------------------------------------------
-# Pastikan stopwords sudah tersedia
-nltk.download('punkt')
-nltk.download('stopwords')
-from nltk.corpus import stopwords
-
 # List stopwords
 listStopwords = set(stopwords.words('indonesian') + stopwords.words('english'))
 listStopwords.update([
