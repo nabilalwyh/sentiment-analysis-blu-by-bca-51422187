@@ -8,6 +8,8 @@ import re
 import emoji
 import nltk
 from nltk.corpus import stopwords
+if not os.path.exists(nltk.data.find('corpora/stopwords', raise_on_error=False)):
+    nltk.download('stopwords')
 import string
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
