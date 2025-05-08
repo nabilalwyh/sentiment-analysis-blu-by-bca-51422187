@@ -7,9 +7,9 @@ from wordcloud import WordCloud
 import re
 import emoji
 import nltk
+# Safe way to download stopwords only if not already present
+nltk.download('stopwords', quiet=True)
 from nltk.corpus import stopwords
-if not os.path.exists(nltk.data.find('corpora/stopwords', raise_on_error=False)):
-    nltk.download('stopwords')
 import string
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
