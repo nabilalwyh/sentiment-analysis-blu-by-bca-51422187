@@ -211,7 +211,7 @@ with st.sidebar:
     st.image("image/blu.png")  # Ganti path sesuai lokasi logo kamu
 
     # Navigasi di sidebar
-    page = st.selectbox("Navigasi", ["Tentang blu", "Analisis Data Ulasan", "Analisis Sentimen"])
+    page = st.selectbox("Navigasi", ["Tentang blu", "Analisis Data Ulasan", "Prediksi Sentimen"])
 
 # ------------- PAGE 1: TENTANG BLU -------------
 if page == "Tentang blu":
