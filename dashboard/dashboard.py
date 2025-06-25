@@ -314,8 +314,8 @@ elif page == "Analisis Data Ulasan":
 
     data_path = "data/ulasan_sentimen.csv"
 
-    # Distribusi Sentimen (Lexicon-based
-    st.header("Distribusi Sentimen (Lexicon-based)")
+    # Distribusi Sentimen (Lexicon-based)
+    st.header("Distribusi Sentimen")
     col1, col2 = st.columns([2,2])
     with col1: 
         pie_sentimen(data_path)  # pastikan fungsi ini sudah kamu definisikan
