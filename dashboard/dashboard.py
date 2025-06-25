@@ -223,7 +223,7 @@ if page == "Tentang blu":
     st.markdown(
         """
         <div style="text-align: center;">
-            <img src="image/logo.png" width="120">
+            <img src="./image/logo.png" width="120">
         </div>
         """,
         unsafe_allow_html=True
