@@ -295,7 +295,7 @@ if page == "Tentang blu":
 
 # ------------- PAGE 2: ANALISIS DATA ULASAN -------------
 elif page == "Analisis Data Ulasan":
-    st.title("📋 Ulasan Pengguna Aplikasi blu")
+    st.title("📋 Apa Kata Mereka Tentang blu?")
 
     data_path = "data/data_model.csv"
     data_model = load_data(data_path)
