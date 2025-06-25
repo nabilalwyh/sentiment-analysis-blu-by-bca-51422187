@@ -310,12 +310,12 @@ elif page == "Analisis Data Ulasan":
 
     st.markdown(filtered_data[['No', 'Ulasan', 'Rating']].to_html(index=False, escape=False), unsafe_allow_html=True)
 
-    st.title("📊 Analisis Sentimen Ulasan")
+    st.title("📊 Analisis Sentimen Ulasan - Lexicon Based")
 
     data_path = "data/ulasan_sentimen.csv"
 
     # Distribusi Sentimen (Lexicon-based
-    st.header("Distribusi Sentimen (Lexicon-based)")
+    st.header("Distribusi Sentimen")
     col1, col2 = st.columns([2,2])
     with col1: 
         pie_sentimen(data_path)  # pastikan fungsi ini sudah kamu definisikan
