@@ -218,6 +218,7 @@ if page == "Tentang blu":
     st.title('Analisis Sentimen Aplikasi blu by BCA Digital :bank:')
 
     st.header('Apa itu blu by BCA Digital?')
+    st.image("image/logo.png")
     st.write('''
     blu by BCA Digital adalah aplikasi mobile banking dari BCA Digital yang menawarkan pengalaman perbankan digital yang inovatif dan memudahkan pengelolaan keuangan sehari-hari.
     Dengan desain yang user-friendly, blu menyediakan berbagai fitur untuk memenuhi kebutuhan transaksi finansial pengguna, mulai dari pembukaan rekening hingga transaksi perbankan yang aman dan cepat.
