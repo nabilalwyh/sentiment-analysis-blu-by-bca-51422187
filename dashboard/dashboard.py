@@ -371,7 +371,7 @@ elif page == "Analisis Data Ulasan":
 
 
 # ------------- PAGE 3: ANALISIS DATA ULASAN -------------
-elif page == "Analisis Sentimen":
+elif page == "Prediksi Sentimen":
     # Load model dan vectorizer
     model = joblib.load("model/model.joblib")
     vectorizer = joblib.load("model/tfidf_vectorizer.joblib")
@@ -379,7 +379,7 @@ elif page == "Analisis Sentimen":
     # Inisialisasi analyzer
     analyzer = SentimentAnalyzer(vectorizer, model)
 
-    st.title("Analisis Sentimen Ulasan")
+    st.title("Prediksi Sentimen Ulasan Baru")
 
     kalimat = st.text_input("Masukkan kalimat:")
 
