@@ -235,7 +235,7 @@ if page == "Tentang blu":
 
 
     st.header("Fitur Utama Aplikasi blu")
-    tab1, tab2, tab3 = st.tabs(["bluSaving", "bluGather", "bluDeposit"])
+    tab1, tab2, tab3 = st.tabs(["bluSaving", "bluGether", "bluDeposit"])
     with tab1:
         col1, col2 = st.columns([2, 3])  # kolom kiri lebih kecil dari kanan
 
