@@ -218,11 +218,10 @@ if page == "Tentang blu":
     st.title('Analisis Sentimen Aplikasi blu by BCA Digital :bank:')
 
     st.header('Apa itu blu by BCA Digital?')
-    import streamlit as st
 
-    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    st.image("image/logo.png", width=120)
-    st.markdown("</div>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("image/logo.png", width=120)
 
     st.markdown(
         """
