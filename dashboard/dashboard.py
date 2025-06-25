@@ -271,6 +271,28 @@ if page == "Tentang blu":
             st.write("Fitur deposito berjangka dari blu yang memberikan bunga kompetitif dan pilihan tenor fleksibel.")
             st.write("Pembuatan dan pencairan deposito mulai dari 1 juta, bisa dilakukan langsung dari aplikasi tanpa harus ke bank. Cair sebelum jatuh tempo? Tetap aman, tanpa penalti!")
 
+    st.header("Unduh dan Nikmati Pengalaman Transaksi dengan blu!")
+    st.markdown(
+    """
+    <div style="text-align: justify;">
+    Unduh sekarang dan rasakan kemudahan mengelola keuangan langsung dari smartphone kamu!  
+    Aplikasi <strong>blu by BCA Digital</strong> tersedia gratis di Google Play Store.
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    st.markdown(
+        """
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://play.google.com/store/apps/details?id=com.bcadigital.blu&hl=id" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Download on Google Play" style="height:60px;">
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 # ------------- PAGE 2: ANALISIS DATA ULASAN -------------
 elif page == "Analisis Data Ulasan":
     st.title("📋 Ulasan Pengguna Aplikasi blu")
