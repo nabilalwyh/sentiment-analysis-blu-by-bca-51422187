@@ -222,17 +222,22 @@ if page == "Tentang blu":
         st.image("image/logo.png")
 
     st.markdown(
-        """
-        <div style="background-color:#f4f9f9; padding:20px; border-radius:10px;">
-            <h3 style="color:#005BAC;">🔎 Apa itu blu?</h3>
-            <p style="text-align:justify; font-size:16px;">
-                <strong>blu by BCA Digital</strong> adalah aplikasi mobile banking yang menawarkan layanan perbankan digital sepenuhnya, 
-                tanpa perlu ke cabang. Dirancang dengan antarmuka yang modern dan mudah digunakan, blu membantu pengguna mengelola keuangan 
-                secara praktis, cepat, dan aman dari genggaman tangan.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
+    """
+    <div style="background-color:#f4f9f9; padding:20px; border-radius:10px;">
+        <h3 style="color:#005BAC;">🔎 Apa itu blu?</h3>
+        <p style="text-align:justify; font-size:16px;">
+            <strong>blu by BCA Digital</strong> merupakan aplikasi mobile banking inovatif yang resmi diluncurkan pada 22 Juli 2021 
+            sebagai bagian dari <strong>BCA Group</strong>. Mengusung konsep <em>Banking as a Service (BaaS)</em>, blu memungkinkan integrasi 
+            layanan keuangan digital secara fleksibel melalui API. 
+        </p>
+        <p style="text-align:justify; font-size:16px;">
+            Didukung oleh infrastruktur digital yang kokoh dari BCA, blu memudahkan pengguna untuk membuka rekening tanpa perlu datang ke kantor cabang, 
+            melakukan transfer, membayar berbagai tagihan, hingga mengelola keuangan secara mandiri langsung dari smartphone. 
+            Dengan antarmuka yang modern dan ramah pengguna, blu hadir untuk menjawab kebutuhan finansial generasi digital masa kini.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True
     )
 
     st.markdown("---")
