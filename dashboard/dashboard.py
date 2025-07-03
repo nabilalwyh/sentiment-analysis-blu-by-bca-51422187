@@ -339,10 +339,10 @@ elif page == "Analisis Data Ulasan":
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown(f"""
-        <div style="background-color:#D0F2F2; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
-            <h4 style="color:#027373; margin-bottom:5px;">😊 Positif</h4>
-            <h2 style="color:#027373;">{pos_pct}%</h2>
-            <p style="font-size:13px; color:#555;">{positif:,} dari {total:,} ulasan</p>
+        <div style="background-color:#FFD6D6; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
+            <h4 style="color:#D40000; margin-bottom:5px;">😠 Negatif</h4>
+            <h2 style="color:#D40000;">{neg_pct}%</h2>
+            <p style="font-size:13px; color:#555;">{negatif:,} dari {total:,} ulasan</p>
         </div>
         """, unsafe_allow_html=True)
     with col2:
@@ -355,10 +355,10 @@ elif page == "Analisis Data Ulasan":
         """, unsafe_allow_html=True)
     with col3:
         st.markdown(f"""
-        <div style="background-color:#FFD6D6; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
-            <h4 style="color:#D40000; margin-bottom:5px;">😠 Negatif</h4>
-            <h2 style="color:#D40000;">{neg_pct}%</h2>
-            <p style="font-size:13px; color:#555;">{negatif:,} dari {total:,} ulasan</p>
+        <div style="background-color:#D0F2F2; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
+            <h4 style="color:#027373; margin-bottom:5px;">😊 Positif</h4>
+            <h2 style="color:#027373;">{pos_pct}%</h2>
+            <p style="font-size:13px; color:#555;">{positif:,} dari {total:,} ulasan</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -389,9 +389,9 @@ elif page == "Analisis Data Ulasan":
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=sentiment_table.index.astype(str),
-        y=sentiment_table['Negatif'],
-        name='Negatif 😠',
-        marker_color='rgb(255, 80, 80)'
+        y=sentiment_table['Positif'],
+        name='Positif 😊',
+        marker_color='rgb(0, 200, 150)'
     ))
     fig.add_trace(go.Bar(
         x=sentiment_table.index.astype(str),
@@ -401,10 +401,11 @@ elif page == "Analisis Data Ulasan":
     ))
     fig.add_trace(go.Bar(
         x=sentiment_table.index.astype(str),
-        y=sentiment_table['Positif'],
-        name='Positif 😊',
-        marker_color='rgb(0, 200, 150)'
+        y=sentiment_table['Negatif'],
+        name='Negatif 😠',
+        marker_color='rgb(255, 80, 80)'
     ))
+    
 
     fig.update_layout(
         barmode='stack',
