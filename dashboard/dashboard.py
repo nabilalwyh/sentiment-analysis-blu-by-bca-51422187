@@ -16,6 +16,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.base import BaseEstimator
 import joblib
 sns.set(style='dark')
+import plotly.graph_objects as go
 
 
 # ------------------------------------------------------- Class Analisis Sentimen -------------------------------------------------------
