@@ -372,7 +372,7 @@ elif page == "Analisis Data Ulasan":
     sentiment_table = rating_sentimen("data/ulasan_sentimen.csv")
     col1, col2 = st.columns([1.6, 2.4])
     with col1:
-        st.dataframe(sentiment_table, use_container_width=True, height=230)
+        st.dataframe(sentiment_table)
     with col2:
         st.markdown("""
         <ul style='font-size:15px;'>
