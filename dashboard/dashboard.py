@@ -215,8 +215,7 @@ def tampilkan_footer():
         """
         <hr style="margin-top:40px; margin-bottom:10px; border: none; height: 1px; background-color: #e0e0e0;">
         <div style="text-align: center; font-size: 14px; color: #777;">
-            Created with ❤️ by <b>Nabila Alawiyah</b> — 51422187<br>
-            <span style="font-size: 13px;">Universitas Gunadarma, 2025</span>
+            Created with ❤️ by <b>Nabila Alawiyah</b> — 51422187 — Universitas Gunadarma, 2025<br>
         </div>
         """,
         unsafe_allow_html=True
