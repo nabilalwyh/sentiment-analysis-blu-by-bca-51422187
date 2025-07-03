@@ -497,11 +497,12 @@ elif page == "Prediksi Sentimen":
         st.markdown("#### 💬 Masukkan Kalimat")
         kalimat = st.text_area("Contoh: Aplikasi blu sangat membantu dan tampilannya bagus", height=100)
 
-        if st.button("🔎 Analisis Sentimen", use_container_width=True):
+        # Tombol Analisis
+        if st.button("🔎 Analisis Sentimen"):
             if kalimat.strip() != "":
                 hasil = analyzer.proses_teks_input(kalimat)
 
-                # Tampilkan hasil dengan warna
+                # Tampilkan hasil prediksi
                 warna = {"Positif": "#D0F2F2", "Netral": "#FFF4CC", "Negatif": "#FFD6D6"}
                 ikon = {"Positif": "😊", "Netral": "😐", "Negatif": "😠"}
 
