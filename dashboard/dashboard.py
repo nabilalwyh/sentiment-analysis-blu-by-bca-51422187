@@ -321,10 +321,9 @@ elif page == "Analisis Data Ulasan":
     </div>
     """, unsafe_allow_html=True)
 
-    # Load data sentimen
+    # ===== LOAD DAN RINGKASAN SENTIMEN =====
     df_sentimen = pd.read_csv("data/ulasan_sentimen.csv")
 
-    # Hitung jumlah label
     total = len(df_sentimen)
     positif = len(df_sentimen[df_sentimen['sentiment'] == 1])
     netral = len(df_sentimen[df_sentimen['sentiment'] == 0])
@@ -334,9 +333,7 @@ elif page == "Analisis Data Ulasan":
     net_pct = round((netral / total) * 100, 1)
     neg_pct = round((negatif / total) * 100, 1)
 
-    # Card layout warna-warni
     col1, col2, col3 = st.columns(3)
-
     with col1:
         st.markdown(f"""
         <div style="background-color:#D0F2F2; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
@@ -345,7 +342,6 @@ elif page == "Analisis Data Ulasan":
             <p style="font-size:13px; color:#555;">{positif:,} dari {total:,} ulasan</p>
         </div>
         """, unsafe_allow_html=True)
-
     with col2:
         st.markdown(f"""
         <div style="background-color:#FFF4CC; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
@@ -354,7 +350,6 @@ elif page == "Analisis Data Ulasan":
             <p style="font-size:13px; color:#555;">{netral:,} dari {total:,} ulasan</p>
         </div>
         """, unsafe_allow_html=True)
-
     with col3:
         st.markdown(f"""
         <div style="background-color:#FFD6D6; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
@@ -364,10 +359,9 @@ elif page == "Analisis Data Ulasan":
         </div>
         """, unsafe_allow_html=True)
 
-
     st.markdown("---")
 
-    # ===== TABEL ULASAN =====
+    # ===== TABEL ULASAN TERPILIH =====
     st.markdown("### 💬 Ulasan Terpilih")
     jumlah_data = st.slider("Tampilkan berapa banyak ulasan?", 5, 50, 10, step=5)
     rating_filter = st.multiselect("Filter berdasarkan rating:", [1, 2, 3, 4, 5], default=[1, 2, 3, 4, 5])
@@ -379,79 +373,71 @@ elif page == "Analisis Data Ulasan":
 
     st.markdown("<div style='margin-top: -10px;'>", unsafe_allow_html=True)
     st.markdown(filtered[['No', 'Ulasan', 'Rating']].to_html(index=False, escape=False), unsafe_allow_html=True)
-    # st.dataframe(filtered[['No', 'Ulasan', 'Rating']], height=300, use_container_width=True)
 
     st.markdown("---")
 
-    # ===== SENTIMEN PER RATING (Estetik Dashboard Style) =====
+    # ===== SENTIMEN PER RATING - STACKED BAR =====
     st.markdown("## ⭐ Sentimen Berdasarkan Rating")
-    if df_sentimen is not None:
-        # Hitung jumlah sentimen per rating
-        sentiment_table = df_sentimen.groupby(['score', 'sentiment']).size().unstack(fill_value=0)
-        sentiment_table = sentiment_table.rename(columns={-1: "Negatif", 0: "Netral", 1: "Positif"})
 
+    sentiment_table = df_sentimen.groupby(['score', 'sentiment']).size().unstack(fill_value=0)
+    sentiment_table = sentiment_table.rename(columns={-1: 'Negatif', 0: 'Netral', 1: 'Positif'})
+    sentiment_table = sentiment_table.reindex([1, 2, 3, 4, 5])  # biar urutan rating naik
 
-        # Tampilkan info dalam card per rating
-        for rating in sorted(sentiment_table.index, reverse=True):
-            neg = sentiment_table.loc[rating, "Negatif"]
-            neu = sentiment_table.loc[rating, "Netral"]
-            pos = sentiment_table.loc[rating, "Positif"]
-            total = neg + neu + pos
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=sentiment_table.index.astype(str),
+        y=sentiment_table['Positif'],
+        name='Positif 😊',
+        marker_color='rgb(0, 200, 150)'
+    ))
+    fig.add_trace(go.Bar(
+        x=sentiment_table.index.astype(str),
+        y=sentiment_table['Netral'],
+        name='Netral 😐',
+        marker_color='rgb(255, 211, 0)'
+    ))
+    fig.add_trace(go.Bar(
+        x=sentiment_table.index.astype(str),
+        y=sentiment_table['Negatif'],
+        name='Negatif 😠',
+        marker_color='rgb(255, 80, 80)'
+    ))
 
-            pos_pct = round(pos / total * 100, 1)
-            neu_pct = round(neu / total * 100, 1)
-            neg_pct = round(neg / total * 100, 1)
+    fig.update_layout(
+        barmode='stack',
+        title='Distribusi Sentimen Berdasarkan Rating Pengguna',
+        xaxis_title='Rating',
+        yaxis_title='Jumlah Ulasan',
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        legend_title_text='Sentimen',
+        height=400
+    )
 
-            st.markdown(f"""
-            <div style="background-color:#F8F9FA; padding:20px; border-radius:12px; margin-bottom:15px; box-shadow: 2px 2px 10px rgba(0,0,0,0.05);">
-                <h4 style="margin-bottom:10px;">⭐ Rating {rating}</h4>
-                <div style="display:flex; gap:20px;">
-                    <div style="flex:1; background-color:#E0F7FA; border-radius:10px; padding:15px; text-align:center;">
-                        <h5 style="color:#00796B;">😊 Positif</h5>
-                        <h3 style="color:#00796B;">{pos_pct}%</h3>
-                        <p style="font-size:13px; color:#555;">{pos:,} ulasan</p>
-                    </div>
-                    <div style="flex:1; background-color:#FFF8E1; border-radius:10px; padding:15px; text-align:center;">
-                        <h5 style="color:#FF8F00;">😐 Netral</h5>
-                        <h3 style="color:#FF8F00;">{neu_pct}%</h3>
-                        <p style="font-size:13px; color:#555;">{neu:,} ulasan</p>
-                    </div>
-                    <div style="flex:1; background-color:#FFEBEE; border-radius:10px; padding:15px; text-align:center;">
-                        <h5 style="color:#C62828;">😠 Negatif</h5>
-                        <h3 style="color:#C62828;">{neg_pct}%</h3>
-                        <p style="font-size:13px; color:#555;">{neg:,} ulasan</p>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+    st.plotly_chart(fig, use_container_width=True)
 
-        st.markdown("""
-        <div style='text-align:center; color:#888; font-size:13px; margin-top:20px;'>
-            Data di atas menunjukkan persebaran sentimen pada tiap rating bintang dari pengguna aplikasi blu.
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("---")
 
-        # ===== WORDCLOUD SECTION =====
-        st.markdown("### ☁️ WordCloud Berdasarkan Sentimen")
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.markdown("#### 😊 Positif")
-            tampilkan_wordcloud("data/ulasan_sentimen.csv", 1, "Positif")
-        with col2:
-            st.markdown("#### 😐 Netral")
-            tampilkan_wordcloud("data/ulasan_sentimen.csv", 0, "Netral")
-        with col3:
-            st.markdown("#### 😠 Negatif")
-            tampilkan_wordcloud("data/ulasan_sentimen.csv", -1, "Negatif")
+    # ===== WORDCLOUD SECTION =====
+    st.markdown("### ☁️ WordCloud Berdasarkan Sentimen")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("#### 😊 Positif")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", 1, "Positif")
+    with col2:
+        st.markdown("#### 😐 Netral")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", 0, "Netral")
+    with col3:
+        st.markdown("#### 😠 Negatif")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", -1, "Negatif")
 
-        # ===== FOOTER =====
-        st.markdown("""
-        <hr style="margin-top:40px;">
-        <div style='text-align: center; font-size:13px; color: gray;'>
-            © 2025 — Nabila Alawiyah | 51422187 | Universitas Gunadarma
-        </div>
-        """, unsafe_allow_html=True)
-
+    # ===== FOOTER =====
+    st.markdown("""
+    <hr style="margin-top:40px;">
+    <div style='text-align: center; font-size:13px; color: gray;'>
+        © 2025 — Nabila Alawiyah | 51422187 | Universitas Gunadarma
+    </div>
+    """, unsafe_allow_html=True)
 
 # ------------- PAGE 3: ANALISIS DATA ULASAN -------------
 elif page == "Prediksi Sentimen":
