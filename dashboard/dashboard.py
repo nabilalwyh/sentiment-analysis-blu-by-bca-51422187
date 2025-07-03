@@ -184,8 +184,14 @@ def tampilkan_wordcloud(data_path, sentiment_value):
     if os.path.exists(data_path):
         data_model = pd.read_csv(data_path)
 
+        # Ambil semua teks dari sentimen yang diminta
         teks = " ".join(data_model[data_model['sentiment'] == sentiment_value]['text_akhir'].dropna())
 
+        if not teks.strip():
+            st.warning("Tidak ada ulasan untuk kategori sentimen ini.")
+            return
+
+        # Buat WordCloud
         wordcloud = WordCloud(
             width=800,
             height=800,
@@ -194,10 +200,12 @@ def tampilkan_wordcloud(data_path, sentiment_value):
             prefer_horizontal=1.0
         ).generate(teks)
 
+        # Tampilkan gambar
         fig, ax = plt.subplots(figsize=(5, 5))
-        ax.imshow(wordcloud)
+        ax.imshow(wordcloud, interpolation='bilinear')
         ax.axis("off")
         st.pyplot(fig)
+
     else:
         st.error(f"File tidak ditemukan: {data_path}")
 
