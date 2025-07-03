@@ -513,3 +513,6 @@ elif page == "Prediksi Sentimen":
                 st.error(f"Hasil tidak dikenali: {hasil}")
         else:
             st.warning("Kalimat tidak boleh kosong.")
+
+    # Footer
+    tampilkan_footer()
