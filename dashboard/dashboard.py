@@ -221,7 +221,7 @@ if page == "Tentang blu":
     st.markdown("""
     <div style="text-align:center; padding:10px 0;">
         <h2 style="color:#005BAC; margin-bottom:5px;">📱 Tentang Aplikasi blu by BCA Digital</h2>
-        <p style="font-size:16px;">Halaman ini akan menampilkan penjelasan singkat tentang <strong>blu by BCA Digital</strong>.</p>
+        <p style="font-size:16px;">Halaman ini akan menampilkan penjelasan singkat <strong>tentang</strong> blu by BCA Digital.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -325,7 +325,7 @@ elif page == "Analisis Data Ulasan":
     st.markdown("""
     <div style="text-align:center; padding:10px 0;">
         <h2 style="color:#005BAC; margin-bottom:5px;">📊 Analisis Data Ulasan</h2>
-        <p style="font-size:16px;">Dashboard ini menyajikan ulasan dan analisis sentimen pengguna aplikasi <strong>blu by BCA Digital</strong>.</p>
+        <p style="font-size:16px;">Dashboard ini menyajikan <strong>ulasan dan analisis sentimen pengguna</strong> aplikasi blu by BCA Digital.</p>
     </div>
     """, unsafe_allow_html=True)
 
