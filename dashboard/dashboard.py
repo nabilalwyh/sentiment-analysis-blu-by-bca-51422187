@@ -383,22 +383,53 @@ elif page == "Analisis Data Ulasan":
 
     st.markdown("---")
 
-    # ===== SENTIMEN PER RATING =====
-    st.markdown("### ⭐ Sentimen Berdasarkan Rating")
-    sentiment_table = rating_sentimen("data/ulasan_sentimen.csv")
-    col1, col2 = st.columns([1.6, 2.4])
-    with col1:
-        st.dataframe(sentiment_table)
-    with col2:
-        st.markdown("""
-        <ul style='font-size:15px;'>
-            <li>⭐ <b>Rating 5</b> → mayoritas <span style='color:green;'>positif</span></li>
-            <li>⭐ <b>Rating 1</b> → dominan <span style='color:red;'>negatif</span></li>
-            <li>⭐ <b>Rating 3</b> → cenderung netral</li>
-        </ul>
+    # ===== SENTIMEN PER RATING (Estetik Dashboard Style) =====
+    st.markdown("## ⭐ Sentimen Berdasarkan Rating")
+
+
+if df_sentimen is not None:
+    # Rename kolom biar rapi
+    sentiment_table = df_sentimen.rename(columns={-1: "Negatif", 0: "Netral", 1: "Positif"})
+
+    # Tampilkan info dalam card per rating
+    for rating in sorted(sentiment_table.index, reverse=True):
+        neg = sentiment_table.loc[rating, "Negatif"]
+        neu = sentiment_table.loc[rating, "Netral"]
+        pos = sentiment_table.loc[rating, "Positif"]
+        total = neg + neu + pos
+
+        pos_pct = round(pos / total * 100, 1)
+        neu_pct = round(neu / total * 100, 1)
+        neg_pct = round(neg / total * 100, 1)
+
+        st.markdown(f"""
+        <div style="background-color:#F8F9FA; padding:20px; border-radius:12px; margin-bottom:15px; box-shadow: 2px 2px 10px rgba(0,0,0,0.05);">
+            <h4 style="margin-bottom:10px;">⭐ Rating {rating}</h4>
+            <div style="display:flex; gap:20px;">
+                <div style="flex:1; background-color:#E0F7FA; border-radius:10px; padding:15px; text-align:center;">
+                    <h5 style="color:#00796B;">😊 Positif</h5>
+                    <h3 style="color:#00796B;">{pos_pct}%</h3>
+                    <p style="font-size:13px; color:#555;">{pos:,} ulasan</p>
+                </div>
+                <div style="flex:1; background-color:#FFF8E1; border-radius:10px; padding:15px; text-align:center;">
+                    <h5 style="color:#FF8F00;">😐 Netral</h5>
+                    <h3 style="color:#FF8F00;">{neu_pct}%</h3>
+                    <p style="font-size:13px; color:#555;">{neu:,} ulasan</p>
+                </div>
+                <div style="flex:1; background-color:#FFEBEE; border-radius:10px; padding:15px; text-align:center;">
+                    <h5 style="color:#C62828;">😠 Negatif</h5>
+                    <h3 style="color:#C62828;">{neg_pct}%</h3>
+                    <p style="font-size:13px; color:#555;">{neg:,} ulasan</p>
+                </div>
+            </div>
+        </div>
         """, unsafe_allow_html=True)
 
-    st.markdown("---")
+    st.markdown("""
+    <div style='text-align:center; color:#888; font-size:13px; margin-top:20px;'>
+        Data di atas menunjukkan persebaran sentimen pada tiap rating bintang dari pengguna aplikasi blu.
+    </div>
+    """, unsafe_allow_html=True)
 
     # ===== WORDCLOUD SECTION =====
     st.markdown("### ☁️ WordCloud Berdasarkan Sentimen")
