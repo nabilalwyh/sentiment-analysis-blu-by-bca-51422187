@@ -209,6 +209,18 @@ def tampilkan_wordcloud(data_path, sentiment_value):
     else:
         st.error(f"File tidak ditemukan: {data_path}")
 
+# Fungsi footer
+def tampilkan_footer():
+    st.markdown(
+        """
+        <hr style="margin-top: 40px; margin-bottom:10px;">
+        <div style="text-align:center; color:gray; font-size:14px;">
+            Nabila Alawiyah | 51422187 | Universitas Gunadarma
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 # Halaman sidebar
 with st.sidebar:
     st.image("image/blu.png")  # Ganti path sesuai lokasi logo kamu
@@ -308,15 +320,7 @@ if page == "Tentang blu":
     )
 
     # Footer
-    st.markdown(
-        """
-        <hr style="margin-top: 40px; margin-bottom:10px;">
-        <div style="text-align:center; color:gray; font-size:14px;">
-            Nabila Alawiyah | 51422187 | Universitas Gunadarma
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    tampilkan_footer()
 
 # ------------- PAGE 2: ANALISIS DATA ULASAN -------------
 elif page == "Analisis Data Ulasan":
@@ -468,13 +472,8 @@ elif page == "Analisis Data Ulasan":
         """, unsafe_allow_html=True)
         tampilkan_wordcloud("data/ulasan_sentimen.csv", 1)
 
-    # ===== FOOTER =====
-    st.markdown("""
-    <hr style="margin-top:40px;">
-    <div style='text-align: center; font-size:13px; color: gray;'>
-        © 2025 — Nabila Alawiyah | 51422187 | Universitas Gunadarma
-    </div>
-    """, unsafe_allow_html=True)
+    # Footer
+    tampilkan_footer()
 
 # ------------- PAGE 3: ANALISIS DATA ULASAN -------------
 elif page == "Prediksi Sentimen":
