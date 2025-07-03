@@ -433,16 +433,34 @@ elif page == "Analisis Data Ulasan":
 
     # ===== WORDCLOUD SECTION =====
     st.markdown("### ☁️ WordCloud Berdasarkan Sentimen")
+    st.markdown("<p style='margin-top:-10px; color:#666;'>Visualisasi kata yang paling sering muncul pada masing-masing kategori sentimen.</p>", unsafe_allow_html=True)
+
     col1, col2, col3 = st.columns(3)
+
     with col1:
-        st.markdown("#### 😊 Positif")
+        st.markdown("""
+        <div style="background-color:#E0F7FA; padding:15px; border-radius:12px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
+            <h4 style="color:#00796B;">😊 Positif</h4>
+        </div>
+        """, unsafe_allow_html=True)
         tampilkan_wordcloud("data/ulasan_sentimen.csv", 1, "Positif")
+
     with col2:
-        st.markdown("#### 😐 Netral")
+        st.markdown("""
+        <div style="background-color:#FFF8E1; padding:15px; border-radius:12px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
+            <h4 style="color:#FF8F00;">😐 Netral</h4>
+        </div>
+        """, unsafe_allow_html=True)
         tampilkan_wordcloud("data/ulasan_sentimen.csv", 0, "Netral")
+
     with col3:
-        st.markdown("#### 😠 Negatif")
+        st.markdown("""
+        <div style="background-color:#FFEBEE; padding:15px; border-radius:12px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
+            <h4 style="color:#C62828;">😠 Negatif</h4>
+        </div>
+        """, unsafe_allow_html=True)
         tampilkan_wordcloud("data/ulasan_sentimen.csv", -1, "Negatif")
+
 
     # ===== FOOTER =====
     st.markdown("""
