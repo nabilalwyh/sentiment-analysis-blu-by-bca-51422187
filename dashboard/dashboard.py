@@ -324,11 +324,11 @@ elif page == "Analisis Data Ulasan":
     # ===== METRIC PANEL =====
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric(label="📈 Sentimen Positif", value="48%", delta="+3.2%")
+        st.metric(label="📈 Sentimen Positif", value="48%")
     with col2:
-        st.metric(label="📉 Sentimen Negatif", value="35.7%", delta="-1.1%")
+        st.metric(label="📉 Sentimen Negatif", value="35.7%")
     with col3:
-        st.metric(label="😐 Sentimen Netral", value="16.3%", delta="0.0%")
+        st.metric(label="😐 Sentimen Netral", value="16.3%")
 
     st.markdown("---")
 
@@ -362,7 +362,8 @@ elif page == "Analisis Data Ulasan":
     filtered = filtered.rename(columns={'content': 'Ulasan', 'score': 'Rating'})
 
     st.markdown("<div style='margin-top: -10px;'>", unsafe_allow_html=True)
-    st.dataframe(filtered[['No', 'Ulasan', 'Rating']], height=300, use_container_width=True)
+    st.markdown(filtered[['No', 'Ulasan', 'Rating']].to_html(index=False, escape=False), unsafe_allow_html=True)
+    # st.dataframe(filtered[['No', 'Ulasan', 'Rating']], height=300, use_container_width=True)
 
     st.markdown("---")
 
