@@ -385,11 +385,11 @@ elif page == "Analisis Data Ulasan":
 
     # ===== SENTIMEN PER RATING (Estetik Dashboard Style) =====
     st.markdown("## ⭐ Sentimen Berdasarkan Rating")
-
-
     if df_sentimen is not None:
-        # Rename kolom biar rapi
-        sentiment_table = df_sentimen.rename(columns={-1: "Negatif", 0: "Netral", 1: "Positif"})
+        # Hitung jumlah sentimen per rating
+        sentiment_table = df_sentimen.groupby(['score', 'sentiment']).size().unstack(fill_value=0)
+        sentiment_table = sentiment_table.rename(columns={-1: "Negatif", 0: "Netral", 1: "Positif"})
+
 
         # Tampilkan info dalam card per rating
         for rating in sorted(sentiment_table.index, reverse=True):
