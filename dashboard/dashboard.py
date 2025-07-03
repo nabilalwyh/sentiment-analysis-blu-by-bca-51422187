@@ -484,44 +484,13 @@ elif page == "Prediksi Sentimen":
     # Inisialisasi analyzer
     analyzer = SentimentAnalyzer(vectorizer, model)
 
-    # ===== HEADER =====
-    st.markdown("""
-    <div style="text-align:center; padding: 10px 0 25px 0;">
-        <h2 style="color:#004AAD;">🔍 Prediksi Sentimen</h2>
-        <p style="font-size:16px;">Masukkan kalimat ulasan pengguna untuk memprediksi sentimennya secara otomatis.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.title("Prediksi Sentimen Ulasan Baru")
 
-    # ===== INPUT AREA =====
-    with st.container():
-        st.markdown("#### 💬 Masukkan Kalimat")
-        kalimat = st.text_area(
-            "Contoh: Aplikasi blu sangat membantu dan tampilannya bagus", 
-            height=100, 
-            placeholder="Tulis ulasan pengguna di sini..."
-        )
+    kalimat = st.text_input("Masukkan kalimat:")
 
-        # Mapping label ke tampilan
-        label_mapping = {
-            "Positif": ("Positif", "😊", "#D0F2F2"),
-            "Netral": ("Netral", "😐", "#FFF4CC"),
-            "Negatif" : ("Negatif", "😠", "#FFD6D6")
-        }
-
-        # Tombol Analisis
-        if st.button("🔎 Analisis Sentimen"):
-            if kalimat.strip() != "":
-                prediksi = analyzer.proses_teks_input(kalimat).capitalize()
-
-                if prediksi in label_mapping:
-                    label, emoji, warna = label_mapping[prediksi]
-                    st.markdown(f"""
-                    <div style="background-color:{warna}; padding:20px; border-radius:12px; margin-top:20px; text-align:center;">
-                        <h3 style="color:#333;">Hasil Prediksi Sentimen</h3>
-                        <h2 style="margin:10px 0; color:#004AAD;">{emoji} {label}</h2>
-                    </div>
-                    """, unsafe_allow_html=True)
-            else:
-                st.warning("Kalimat tidak boleh kosong.")
-
-
+    if st.button("Input"):
+        if kalimat.strip() != "":
+            hasil = analyzer.proses_teks_input(kalimat)
+            st.success(hasil)
+        else:
+            st.warning("Kalimat tidak boleh kosong.")
