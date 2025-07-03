@@ -217,14 +217,9 @@ with st.sidebar:
 if page == "Tentang blu":
     st.markdown("## 📱 Tentang Aplikasi blu by BCA Digital")
     
-    st.markdown(
-        """
-        <div style="text-align: center; margin-bottom: 10px;">
-            <img src="image/logo.png" width="150">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    left_co, cent_co,last_co = st.columns(3)
+    with cent_co:
+        st.image("image/logo.png")
 
     st.markdown(
         """
