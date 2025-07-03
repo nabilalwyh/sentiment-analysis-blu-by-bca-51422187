@@ -517,8 +517,6 @@ elif page == "Prediksi Sentimen":
                         <h2 style="margin:10px 0; color:#004AAD;">{emoji} {label}</h2>
                     </div>
                     """, unsafe_allow_html=True)
-                else:
-                    st.error(f"Hasil prediksi tidak dikenali: Kalimat terdeteksi {prediksi.lower()}")
             else:
                 st.warning("Kalimat tidak boleh kosong.")
 
