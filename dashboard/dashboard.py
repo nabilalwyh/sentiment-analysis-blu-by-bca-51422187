@@ -445,7 +445,7 @@ elif page == "Analisis Data Ulasan":
             <h4 style="color:#00796B; margin:5px 0;">😊 Positif</h4>
         </div>
         """, unsafe_allow_html=True)
-        tampilkan_wordcloud("data/ulasan_sentimen.csv", 1, "Positif")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", 1)
 
     with col2:
         st.markdown("""
@@ -453,7 +453,7 @@ elif page == "Analisis Data Ulasan":
             <h4 style="color:#FF8F00; margin:5px 0;">😐 Netral</h4>
         </div>
         """, unsafe_allow_html=True)
-        tampilkan_wordcloud("data/ulasan_sentimen.csv", 0, "Netral")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", 0)
 
     with col3:
         st.markdown("""
@@ -461,7 +461,7 @@ elif page == "Analisis Data Ulasan":
             <h4 style="color:#C62828; margin:5px 0;">😠 Negatif</h4>
         </div>
         """, unsafe_allow_html=True)
-        tampilkan_wordcloud("data/ulasan_sentimen.csv", -1, "Negatif")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", -1)
 
 
 
