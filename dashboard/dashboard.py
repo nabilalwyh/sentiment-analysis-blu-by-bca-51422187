@@ -115,7 +115,7 @@ class SentimentAnalyzer:
         # Tahap 3: Prediksi
         pred = self.model.predict(vector)[0]
 
-        return f"Kalimat terdeteksi {pred}"
+        return pred
 
 # ------------------------------------------------------- Function -------------------------------------------------------
 # Fungsi untuk load dataset
@@ -505,13 +505,12 @@ elif page == "Prediksi Sentimen":
         }
 
         # Tombol Analisis
-        if st.button("🔎 Analisis Sentimen"):
+        if st.button("🔎 Analisis Sentimen", use_container_width=True):
             if kalimat.strip() != "":
-                prediksi = analyzer.proses_teks_input(kalimat)
+                prediksi = analyzer.proses_teks_input(kalimat).capitalize()
 
                 if prediksi in label_mapping:
                     label, emoji, warna = label_mapping[prediksi]
-
                     st.markdown(f"""
                     <div style="background-color:{warna}; padding:20px; border-radius:12px; margin-top:20px; text-align:center;">
                         <h3 style="color:#333;">Hasil Prediksi Sentimen</h3>
@@ -519,6 +518,7 @@ elif page == "Prediksi Sentimen":
                     </div>
                     """, unsafe_allow_html=True)
                 else:
-                    st.error(f"Hasil prediksi tidak dikenali: {prediksi}")
+                    st.error(f"Hasil prediksi tidak dikenali: Kalimat terdeteksi {prediksi.lower()}")
             else:
                 st.warning("Kalimat tidak boleh kosong.")
+
