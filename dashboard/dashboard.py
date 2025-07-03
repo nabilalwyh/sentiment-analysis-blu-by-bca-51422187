@@ -219,6 +219,15 @@ if page == "Tentang blu":
     
     st.markdown(
         """
+        <div style="text-align: center; margin-bottom: 10px;">
+            <img src="image/logo.png" width="150">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        """
         <div style="background-color:#f4f9f9; padding:20px; border-radius:10px;">
             <h3 style="color:#005BAC;">🔎 Apa itu blu?</h3>
             <p style="text-align:justify; font-size:16px;">
@@ -230,9 +239,6 @@ if page == "Tentang blu":
         """,
         unsafe_allow_html=True
     )
-
-    st.markdown("###")
-    st.image("image/logo.png", width=150)
 
     st.markdown("---")
     st.markdown("## 🌟 Fitur Unggulan blu")
