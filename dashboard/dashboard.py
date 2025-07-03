@@ -389,9 +389,9 @@ elif page == "Analisis Data Ulasan":
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=sentiment_table.index.astype(str),
-        y=sentiment_table['Positif'],
-        name='Positif 😊',
-        marker_color='rgb(0, 200, 150)'
+        y=sentiment_table['Negatif'],
+        name='Negatif 😠',
+        marker_color='rgb(255, 80, 80)'
     ))
     fig.add_trace(go.Bar(
         x=sentiment_table.index.astype(str),
@@ -401,9 +401,9 @@ elif page == "Analisis Data Ulasan":
     ))
     fig.add_trace(go.Bar(
         x=sentiment_table.index.astype(str),
-        y=sentiment_table['Negatif'],
-        name='Negatif 😠',
-        marker_color='rgb(255, 80, 80)'
+        y=sentiment_table['Positif'],
+        name='Positif 😊',
+        marker_color='rgb(0, 200, 150)'
     ))
 
     fig.update_layout(
@@ -441,12 +441,11 @@ elif page == "Analisis Data Ulasan":
 
     with col1:
         st.markdown("""
-        <div style="background-color:#E0F7FA; padding:10px; border-radius:10px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
-            <h4 style="color:#00796B; margin:5px 0;">😊 Positif</h4>
+        <div style="background-color:#FFEBEE; padding:10px; border-radius:10px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
+            <h4 style="color:#C62828; margin:5px 0;">😠 Negatif</h4>
         </div>
         """, unsafe_allow_html=True)
-        tampilkan_wordcloud("data/ulasan_sentimen.csv", 1)
-
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", -1)
     with col2:
         st.markdown("""
         <div style="background-color:#FFF8E1; padding:10px; border-radius:10px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
@@ -457,13 +456,11 @@ elif page == "Analisis Data Ulasan":
 
     with col3:
         st.markdown("""
-        <div style="background-color:#FFEBEE; padding:10px; border-radius:10px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
-            <h4 style="color:#C62828; margin:5px 0;">😠 Negatif</h4>
+        <div style="background-color:#E0F7FA; padding:10px; border-radius:10px; text-align:center; box-shadow:1px 1px 6px rgba(0,0,0,0.05);">
+            <h4 style="color:#00796B; margin:5px 0;">😊 Positif</h4>
         </div>
         """, unsafe_allow_html=True)
-        tampilkan_wordcloud("data/ulasan_sentimen.csv", -1)
-
-
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", 1)
 
     # ===== FOOTER =====
     st.markdown("""
