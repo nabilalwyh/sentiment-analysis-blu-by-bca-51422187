@@ -312,105 +312,97 @@ if page == "Tentang blu":
 
 # ------------- PAGE 2: ANALISIS DATA ULASAN -------------
 elif page == "Analisis Data Ulasan":
-    # Judul utama
+
+    # ===== HEADER DASHBOARD =====
     st.markdown("""
-        <div style="text-align:center;">
-            <h2 style="color:#005BAC;">📋 Analisis Data Ulasan Pengguna blu</h2>
-            <p style="font-size:17px;">Tinjau bagaimana pengguna menilai aplikasi <strong>blu by BCA Digital</strong> berdasarkan data ulasan dan analisis sentimen.</p>
-        </div>
+    <div style="text-align:center; padding:10px 0;">
+        <h2 style="color:#005BAC; margin-bottom:5px;">📊 blu Sentiment Dashboard</h2>
+        <p style="font-size:16px;">Dashboard ini menyajikan ulasan dan analisis sentimen pengguna aplikasi <strong>blu by BCA Digital</strong>.</p>
+    </div>
     """, unsafe_allow_html=True)
 
-    # Filter section
-    st.markdown("### 🎯 Filter Ulasan")
-    with st.container():
-        col1, col2 = st.columns([2, 2])
-        with col1:
-            jumlah_data = st.slider("Jumlah ulasan yang ingin ditampilkan:", min_value=5, max_value=50, value=10, step=5)
-        with col2:
-            rating_filter = st.multiselect("Filter berdasarkan rating ⭐:", options=[1, 2, 3, 4, 5], default=[1, 2, 3, 4, 5])
-
-    data_model = load_data("data/data_model.csv")
-    filtered_data = data_model[data_model['score'].isin(rating_filter)].copy().head(jumlah_data)
-    filtered_data.insert(0, 'No', range(1, len(filtered_data) + 1))
-    filtered_data = filtered_data.rename(columns={'content': 'Ulasan', 'score': 'Rating'})
-
-    # Ulasan Table
-    st.markdown("### 📄 Ulasan Terpilih")
-    st.markdown("""
-        <div style="font-size:15px; text-align:justify; margin-bottom:10px;">
-            Berikut adalah beberapa ulasan terbaru dari pengguna blu yang telah difilter berdasarkan rating dan jumlah yang kamu tentukan.
-        </div>
-    """, unsafe_allow_html=True)
-    st.markdown(filtered_data[['No', 'Ulasan', 'Rating']].to_html(index=False, escape=False), unsafe_allow_html=True)
+    # ===== METRIC PANEL =====
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric(label="📈 Sentimen Positif", value="48%", delta="+3.2%")
+    with col2:
+        st.metric(label="📉 Sentimen Negatif", value="35.7%", delta="-1.1%")
+    with col3:
+        st.metric(label="😐 Sentimen Netral", value="16.3%", delta="0.0%")
 
     st.markdown("---")
 
-    # Layout Sentimen Overview
-    st.markdown("### 📊 Distribusi Sentimen Pengguna")
-    col1, col2 = st.columns([1.5, 2.5])
+    # ===== PLOT & INSIGHT =====
+    st.markdown("### 🔍 Distribusi Sentimen Global")
+    col1, col2 = st.columns([2, 2.5])
     with col1:
         pie_sentimen("data/ulasan_sentimen.csv")
     with col2:
         st.markdown("""
-            <div style="font-size:15px; text-align:justify;">
-                Dari total <strong>17.533</strong> ulasan:
-                <ul style="margin-top:0;">
-                    <li><span style="color:green;"><strong>48%</strong></span> bersentimen positif</li>
-                    <li><span style="color:red;"><strong>35.7%</strong></span> bersentimen negatif</li>
-                    <li><strong>16.3%</strong> bersentimen netral</li>
-                </ul>
-                Mayoritas pengguna merasa puas dengan aplikasi blu, namun tetap ada beberapa keluhan yang bisa menjadi insight pengembangan lebih lanjut.
-            </div>
+        <div style="font-size:15px; text-align:justify; margin-top:20px;">
+        Dari total 17.533 ulasan:
+        <ul>
+            <li>🔵 48% positif (mayoritas pengguna puas)</li>
+            <li>🔴 35.7% negatif (masih perlu peningkatan layanan)</li>
+            <li>⚪ 16.3% netral</li>
+        </ul>
+        </div>
         """, unsafe_allow_html=True)
 
     st.markdown("---")
 
-    # Sentimen per rating (card-style)
-    st.markdown("### 📈 Analisis Sentimen Berdasarkan Rating Pengguna")
-    sentiment_table = rating_sentimen("data/ulasan_sentimen.csv")
-    if sentiment_table is not None:
-        col1, col2 = st.columns([1.8, 2.2])
-        with col1:
-            st.dataframe(sentiment_table, height=260)
-        with col2:
-            st.markdown("""
-                <div style="font-size:15px; text-align:justify;">
-                    <strong>Penjelasan:</strong><br>
-                    <ul>
-                        <li><code>-1</code>: Sentimen negatif</li>
-                        <li><code>0</code>: Sentimen netral</li>
-                        <li><code>1</code>: Sentimen positif</li>
-                    </ul>
-                    <p>Rating bintang menunjukkan kecenderungan sebagai berikut:</p>
-                    <ul>
-                        <li>⭐ <strong>Bintang 5</strong> → Dominan <span style="color:green;">positif</span></li>
-                        <li>⭐ <strong>Bintang 1</strong> → Dominan <span style="color:red;">negatif</span></li>
-                        <li>⭐ <strong>Bintang 3</strong> → Cenderung seimbang</li>
-                    </ul>
-                </div>
-            """, unsafe_allow_html=True)
+    # ===== TABEL ULASAN =====
+    st.markdown("### 💬 Ulasan Terpilih")
+    jumlah_data = st.slider("Tampilkan berapa banyak ulasan?", 5, 50, 10, step=5)
+    rating_filter = st.multiselect("Filter berdasarkan rating:", [1, 2, 3, 4, 5], default=[1, 2, 3, 4, 5])
+
+    data_model = load_data("data/data_model.csv")
+    filtered = data_model[data_model['score'].isin(rating_filter)].copy().head(jumlah_data)
+    filtered.insert(0, 'No', range(1, len(filtered) + 1))
+    filtered = filtered.rename(columns={'content': 'Ulasan', 'score': 'Rating'})
+
+    st.markdown("<div style='margin-top: -10px;'>", unsafe_allow_html=True)
+    st.dataframe(filtered[['No', 'Ulasan', 'Rating']], height=300, use_container_width=True)
 
     st.markdown("---")
 
-    # WordCloud Grid Style
-    st.markdown("### ☁️ Visualisasi Kata Paling Sering Muncul")
-    st.markdown(
-        "<p style='font-size:15px;'>Berikut ini adalah <strong>WordCloud</strong> dari ulasan pengguna berdasarkan kategori sentimen:</p>",
-        unsafe_allow_html=True
-    )
+    # ===== SENTIMEN PER RATING =====
+    st.markdown("### ⭐ Sentimen Berdasarkan Rating")
+    sentiment_table = rating_sentimen("data/ulasan_sentimen.csv")
+    col1, col2 = st.columns([1.6, 2.4])
+    with col1:
+        st.dataframe(sentiment_table, use_container_width=True, height=230)
+    with col2:
+        st.markdown("""
+        <ul style='font-size:15px;'>
+            <li>⭐ <b>Rating 5</b> → mayoritas <span style='color:green;'>positif</span></li>
+            <li>⭐ <b>Rating 1</b> → dominan <span style='color:red;'>negatif</span></li>
+            <li>⭐ <b>Rating 3</b> → cenderung netral</li>
+        </ul>
+        """, unsafe_allow_html=True)
 
+    st.markdown("---")
+
+    # ===== WORDCLOUD SECTION =====
+    st.markdown("### ☁️ WordCloud Berdasarkan Sentimen")
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("#### 😊 Positif")
         tampilkan_wordcloud("data/ulasan_sentimen.csv", 1, "Positif")
-
     with col2:
         st.markdown("#### 😐 Netral")
         tampilkan_wordcloud("data/ulasan_sentimen.csv", 0, "Netral")
-
     with col3:
         st.markdown("#### 😠 Negatif")
         tampilkan_wordcloud("data/ulasan_sentimen.csv", -1, "Negatif")
+
+    # ===== FOOTER =====
+    st.markdown("""
+    <hr style="margin-top:40px;">
+    <div style='text-align: center; font-size:13px; color: gray;'>
+        © 2025 — Nabila Alawiyah | 51422187 | Universitas Gunadarma
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # ------------- PAGE 3: ANALISIS DATA ULASAN -------------
