@@ -484,13 +484,32 @@ elif page == "Prediksi Sentimen":
     # Inisialisasi analyzer
     analyzer = SentimentAnalyzer(vectorizer, model)
 
-    st.title("Prediksi Sentimen Ulasan Baru")
+    # ===== HEADER =====
+    st.markdown("""
+    <div style="text-align:center; padding: 10px 0 25px 0;">
+        <h2 style="color:#004AAD;">🔍 Prediksi Sentimen</h2>
+        <p style="font-size:16px;">Masukkan kalimat ulasan pengguna untuk memprediksi sentimennya secara otomatis</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    kalimat = st.text_input("Masukkan kalimat:")
+    # ===== INPUT AREA =====
+    with st.container():
+        st.markdown("#### 💬 Masukkan Kalimat")
+        kalimat = st.text_area("Contoh: Aplikasi blu sangat membantu dan tampilannya bagus", height=100)
 
-    if st.button("Input"):
-        if kalimat.strip() != "":
-            hasil = analyzer.proses_teks_input(kalimat)
-            st.success(hasil)
-        else:
-            st.warning("Kalimat tidak boleh kosong.")
+        if st.button("🔎 Analisis Sentimen", use_container_width=True):
+            if kalimat.strip() != "":
+                hasil = analyzer.proses_teks_input(kalimat)
+
+                # Tampilkan hasil dengan warna
+                warna = {"Positif": "#D0F2F2", "Netral": "#FFF4CC", "Negatif": "#FFD6D6"}
+                ikon = {"Positif": "😊", "Netral": "😐", "Negatif": "😠"}
+
+                st.markdown(f"""
+                <div style="background-color:{warna[hasil]}; padding:20px; border-radius:12px; margin-top:20px; text-align:center;">
+                    <h3 style="color:#333;">Hasil Prediksi Sentimen</h3>
+                    <h2 style="margin:10px 0; color:#004AAD;">{ikon[hasil]} {hasil}</h2>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.warning("Kalimat tidak boleh kosong.")
