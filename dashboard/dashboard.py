@@ -115,7 +115,7 @@ class SentimentAnalyzer:
         # Tahap 3: Prediksi
         pred = self.model.predict(vector)[0]
 
-        return pred
+        return f"Kalimat terdeteksi {pred}"
     
 # ------------------------------------------------------- Function -------------------------------------------------------
 # Fungsi untuk load dataset
