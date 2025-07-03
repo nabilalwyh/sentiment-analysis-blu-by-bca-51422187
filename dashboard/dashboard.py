@@ -492,7 +492,7 @@ elif page == "Prediksi Sentimen":
     kalimat = st.text_area("Contoh: Aplikasi blu sangat membantu dan tampilannya bagus", height=100)
 
     label_mapping = {
-        "positive": ("Positif", "😊", "#D0F2F2"),
+        "positive": ("Positif", "😊", "#00C896"),
         "neutral": ("Netral", "😐", "#FFF4CC"),
         "negative": ("Negatif", "😠", "#FFD6D6")
     }
