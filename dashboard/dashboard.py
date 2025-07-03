@@ -213,9 +213,10 @@ def tampilkan_wordcloud(data_path, sentiment_value):
 def tampilkan_footer():
     st.markdown(
         """
-        <hr style="margin-top: 40px; margin-bottom:10px;">
-        <div style="text-align:center; color:gray; font-size:14px;">
-            Nabila Alawiyah | 51422187 | Universitas Gunadarma
+        <hr style="margin-top:40px; margin-bottom:10px; border: none; height: 1px; background-color: #e0e0e0;">
+        <div style="text-align: center; font-size: 14px; color: #777;">
+            Created with ❤️ by <b>Nabila Alawiyah</b> — 51422187<br>
+            <span style="font-size: 13px;">Universitas Gunadarma, 2025</span>
         </div>
         """,
         unsafe_allow_html=True
