@@ -503,9 +503,9 @@ elif page == "Prediksi Sentimen":
 
         # Mapping label ke tampilan
         label_mapping = {
-            "Positif": ("Positif", "😊", "#D0F2F2"),
-            "Netral": ("Netral", "😐", "#FFF4CC"),
-            "Negatif": ("Negatif", "😠", "#FFD6D6")
+            1: ("Positif", "😊", "#D0F2F2"),
+            0: ("Netral", "😐", "#FFF4CC"),
+            -1 : ("Negatif", "😠", "#FFD6D6")
         }
 
         # Tombol Analisis
@@ -521,8 +521,6 @@ elif page == "Prediksi Sentimen":
                         <h2 style="margin:10px 0; color:#004AAD;">{emoji} {label}</h2>
                     </div>
                     """, unsafe_allow_html=True)
-                else:
-                    st.error(f"Hasil prediksi tidak dikenali: Kalimat terdeteksi {prediksi.lower()}")
             else:
                 st.warning("Kalimat tidak boleh kosong.")
 
