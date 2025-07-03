@@ -417,6 +417,18 @@ elif page == "Analisis Data Ulasan":
 
     st.plotly_chart(fig, use_container_width=True)
 
+    st.markdown("""
+    <div style="background-color:#F9FAFB; padding:20px; border-radius:10px; box-shadow:1px 1px 6px rgba(0,0,0,0.05); margin-top:20px;">
+        <h4 style="color:#333333;">🔍 Insight:</h4>
+        <ul style="font-size:15px; line-height:1.7; color:#444;">
+            <li><strong>Rating 5</strong> memiliki volume ulasan terbesar dengan dominasi sentimen <span style="color:green;"><strong>positif 😊</strong></span>, menandakan mayoritas pengguna puas dengan layanan blu.</li>
+            <li><strong>Rating 1</strong> didominasi oleh sentimen <span style="color:red;"><strong>negatif 😠</strong></span>, menunjukkan adanya ketidakpuasan yang signifikan dari sebagian pengguna.</li>
+            <li>Rating <strong>3 dan 4</strong> memperlihatkan distribusi sentimen yang lebih seimbang, mencerminkan pengalaman pengguna yang beragam.</li>
+            <li>Distribusi ini memberikan masukan penting bagi pengembang untuk mempertahankan kekuatan dan memperbaiki kelemahan layanan blu.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("---")
 
     # ===== WORDCLOUD SECTION =====
