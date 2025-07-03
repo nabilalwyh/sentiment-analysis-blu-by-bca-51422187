@@ -215,79 +215,90 @@ with st.sidebar:
 
 # ------------- PAGE 1: TENTANG BLU -------------
 if page == "Tentang blu":
-    st.title('Analisis Sentimen Aplikasi blu by BCA Digital :bank:')
-
-    st.header('Apa itu blu by BCA Digital?')
-
-    left_co, cent_co,last_co = st.columns(3)
-    with cent_co:
-        st.image("image/logo.png")
-
+    st.markdown("## 📱 Tentang Aplikasi blu by BCA Digital")
+    
     st.markdown(
         """
-        <div style="text-align: justify;">
-        blu by BCA Digital adalah aplikasi mobile banking dari BCA Digital yang menawarkan pengalaman perbankan digital yang inovatif dan memudahkan pengelolaan keuangan sehari-hari.  
-        Dengan desain yang user-friendly, blu menyediakan berbagai fitur untuk memenuhi kebutuhan transaksi finansial pengguna, mulai dari pembukaan rekening hingga transaksi perbankan yang aman dan cepat.
+        <div style="background-color:#f4f9f9; padding:20px; border-radius:10px;">
+            <h3 style="color:#005BAC;">🔎 Apa itu blu?</h3>
+            <p style="text-align:justify; font-size:16px;">
+                <strong>blu by BCA Digital</strong> adalah aplikasi mobile banking yang menawarkan layanan perbankan digital sepenuhnya, 
+                tanpa perlu ke cabang. Dirancang dengan antarmuka yang modern dan mudah digunakan, blu membantu pengguna mengelola keuangan 
+                secara praktis, cepat, dan aman dari genggaman tangan.
+            </p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
+    st.markdown("###")
+    st.image("image/logo.png", width=150)
 
-    st.header("Fitur Utama Aplikasi blu")
-    tab1, tab2, tab3 = st.tabs(["bluSaving", "bluGether", "bluDeposit"])
-    with tab1:
-        col1, col2 = st.columns([2, 3])  # kolom kiri lebih kecil dari kanan
+    st.markdown("---")
+    st.markdown("## 🌟 Fitur Unggulan blu")
 
+    def fitur_card(judul, gambar, deskripsi):
+        col1, col2 = st.columns([1, 2])
         with col1:
-            st.image("image/bluSaving.png", use_column_width=True)  # ganti dengan path yang sesuai
-
+            st.image(gambar, use_column_width=True)
         with col2:
-            st.subheader("bluSaving")
-            st.write("Mau healing, beli gadget, atau nabung dana darurat? semua bisa diwujudin dengan **bluSaving**!")
-            st.write("Fitur ini memungkinkan kamu untuk menyimpan uang dalam sampai dengan 20 pos tabungan sesuai kebutuhan. Anda bisa menetapkan target dan waktu untuk masing-masing pos, serta memantau perkembangan tabungan secara real-time.")
+            st.markdown(f"<h4 style='color:#007aff;'>{judul}</h4>", unsafe_allow_html=True)
+            st.markdown(f"<p style='text-align:justify; font-size:15px;'>{deskripsi}</p>", unsafe_allow_html=True)
 
-    with tab2:
-        col1, col2 = st.columns([2, 3])  # kolom kiri lebih kecil dari kanan
-
-        with col1:
-            st.image("image/bluGether.png", use_column_width=True)  # ganti dengan path yang sesuai
-
-        with col2:
-            st.subheader("bluGether")
-            st.write("""Nabung bareng buat arisan, jalan-jalan, atau patungan makan? **bluGether** solusinya!""")
-            st.write("Fitur ini memungkinkan kamu untuk nabung bersama teman-teman mu hingga 100 orang.")
-
-            
-    with tab3:
-        col1, col2 = st.columns([2, 3])  # kolom kiri lebih kecil dari kanan
-
-        with col1:
-            st.image("image/bluDeposit.png", use_column_width=True)  # ganti dengan path yang sesuai
-
-        with col2:
-            st.subheader("bluDeposit")
-            st.write("Mau nyimpen dana dengan aman dan tetap mendapatkan imbal hasil? **bluDeposit** solusinya")
-            st.write("Fitur deposito berjangka dari blu yang memberikan bunga kompetitif dan pilihan tenor fleksibel.")
-            st.write("Pembuatan dan pencairan deposito mulai dari 1 juta, bisa dilakukan langsung dari aplikasi tanpa harus ke bank. Cair sebelum jatuh tempo? Tetap aman, tanpa penalti!")
-
-    st.header("Unduh dan Nikmati Pengalaman Transaksi dengan blu!")
-    st.markdown(
-    """
-    <div style="text-align: justify;">
-    Unduh sekarang dan rasakan kemudahan mengelola keuangan langsung dari smartphone kamu!  
-    Aplikasi <strong>blu by BCA Digital</strong> tersedia gratis di Google Play Store.
-    </div>
-    """,
-    unsafe_allow_html=True
+    fitur_card(
+        "💰 bluSaving",
+        "image/bluSaving.png",
+        """
+        Mau nabung buat liburan, gadget, atau dana darurat? Dengan bluSaving, kamu bisa buat hingga 20 pos tabungan 
+        dengan target dan jangka waktu yang bisa disesuaikan. Pantau progresmu secara real-time dan capai tujuan finansial dengan lebih mudah!
+        """
     )
+
+    fitur_card(
+        "👥 bluGether",
+        "image/bluGether.png",
+        """
+        Nabung bareng teman, keluarga, atau komunitas hingga 100 orang! Cocok untuk arisan, jalan-jalan bareng, atau patungan. 
+        Transparan dan langsung terpantau dari satu aplikasi.
+        """
+    )
+
+    fitur_card(
+        "📦 bluDeposit",
+        "image/bluDeposit.png",
+        """
+        Simpan dana dalam bentuk deposito mulai dari 1 juta rupiah dengan bunga menarik dan pilihan tenor fleksibel. 
+        Cairkan kapan pun tanpa penalti, semua bisa langsung dari aplikasi!
+        """
+    )
+
+    st.markdown("---")
+    st.markdown("## 📲 Yuk, Coba blu Sekarang!")
 
     st.markdown(
         """
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="https://play.google.com/store/apps/details?id=com.bcadigital.blu&hl=id" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Download on Google Play" style="height:60px;">
-            </a>
+        <div style="background-color:#e6f2ff; padding:20px; border-radius:10px;">
+            <p style="font-size:16px; text-align:justify;">
+            Unduh <strong>blu by BCA Digital</strong> di smartphone kamu dan nikmati layanan perbankan yang modern dan fleksibel.
+            Aplikasi ini tersedia gratis di <strong>Google Play Store</strong> dan siap memudahkan aktivitas finansialmu.
+            </p>
+            <div style="text-align:center; margin-top:10px;">
+                <a href="https://play.google.com/store/apps/details?id=com.bcadigital.blu&hl=id" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                         style="height:60px;">
+                </a>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Footer
+    st.markdown(
+        """
+        <hr style="margin-top: 40px; margin-bottom:10px;">
+        <div style="text-align:center; color:gray; font-size:14px;">
+            Nabila Alawiyah | 51422187 | Universitas Gunadarma
         </div>
         """,
         unsafe_allow_html=True
