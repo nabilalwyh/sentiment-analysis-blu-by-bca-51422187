@@ -100,13 +100,13 @@ class SentimentAnalyzer:
 
     def proses_teks_input(self, text: str, show_log: bool = False) -> str:
         if show_log: print(f"Teks asli: {text}")
-
+        
         # Tahap 1: Preprocessing
         teks = self.cleaning_text(text)
         teks = self.normalisasi_slang(teks)
         tokens = self.tokenizing_text(teks)
         teks = ' '.join(tokens)
-
+        
         if show_log: print(f"Teks praproses: {teks}")
 
         # Tahap 2: TF-IDF transform
@@ -115,16 +115,8 @@ class SentimentAnalyzer:
         # Tahap 3: Prediksi
         pred = self.model.predict(vector)[0]
 
-        # Mapping angka ke label
-        label_dict = {
-            1: "Positif",
-            0: "Netral",
-            -1: "Negatif"
-        }
-
-        return label_dict.get(pred, "Tidak diketahui")
-
-
+        return pred
+    
 # ------------------------------------------------------- Function -------------------------------------------------------
 # Fungsi untuk load dataset
 def load_data(path):
