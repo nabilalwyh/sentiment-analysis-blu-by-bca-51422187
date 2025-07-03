@@ -492,7 +492,7 @@ elif page == "Prediksi Sentimen":
     kalimat = st.text_area("Contoh: Aplikasi blu sangat membantu dan tampilannya bagus", height=100)
 
     label_mapping = {
-        "positive": ("Positif", "😊", "#00C896"),
+        "positive": ("Positif", "😊", "#D0F2F2"),
         "neutral": ("Netral", "😐", "#FFF4CC"),
         "negative": ("Negatif", "😠", "#FFD6D6")
     }
@@ -514,5 +514,4 @@ elif page == "Prediksi Sentimen":
         else:
             st.warning("Kalimat tidak boleh kosong.")
 
-    # Footer
-    tampilkan_footer()
+    
