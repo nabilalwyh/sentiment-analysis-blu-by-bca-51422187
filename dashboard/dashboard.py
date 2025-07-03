@@ -319,7 +319,7 @@ elif page == "Analisis Data Ulasan":
     # ===== HEADER DASHBOARD =====
     st.markdown("""
     <div style="text-align:center; padding:10px 0;">
-        <h2 style="color:#005BAC; margin-bottom:5px;">📊 blu Sentiment Dashboard</h2>
+        <h2 style="color:#005BAC; margin-bottom:5px;">📊 Analisis Data Ulasan</h2>
         <p style="font-size:16px;">Dashboard ini menyajikan ulasan dan analisis sentimen pengguna aplikasi <strong>blu by BCA Digital</strong>.</p>
     </div>
     """, unsafe_allow_html=True)
