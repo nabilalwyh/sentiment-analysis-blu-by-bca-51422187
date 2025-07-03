@@ -321,33 +321,49 @@ elif page == "Analisis Data Ulasan":
     </div>
     """, unsafe_allow_html=True)
 
-    # ===== METRIC PANEL =====
+    # Load data sentimen
+    df_sentimen = pd.read_csv("data/ulasan_sentimen.csv")
+
+    # Hitung jumlah label
+    total = len(df_sentimen)
+    positif = len(df_sentimen[df_sentimen['sentiment'] == 1])
+    netral = len(df_sentimen[df_sentimen['sentiment'] == 0])
+    negatif = len(df_sentimen[df_sentimen['sentiment'] == -1])
+
+    pos_pct = round((positif / total) * 100, 1)
+    net_pct = round((netral / total) * 100, 1)
+    neg_pct = round((negatif / total) * 100, 1)
+
+    # Card layout warna-warni
     col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric(label="📈 Sentimen Positif", value="48%")
-    with col2:
-        st.metric(label="📉 Sentimen Negatif", value="35.7%")
-    with col3:
-        st.metric(label="😐 Sentimen Netral", value="16.3%")
 
-    st.markdown("---")
-
-    # ===== PLOT & INSIGHT =====
-    st.markdown("### 🔍 Distribusi Sentimen Global")
-    col1, col2 = st.columns([2, 2.5])
     with col1:
-        pie_sentimen("data/ulasan_sentimen.csv")
-    with col2:
-        st.markdown("""
-        <div style="font-size:15px; text-align:justify; margin-top:20px;">
-        Dari total 17.533 ulasan:
-        <ul>
-            <li>🔵 48% positif (mayoritas pengguna puas)</li>
-            <li>🔴 35.7% negatif (masih perlu peningkatan layanan)</li>
-            <li>⚪ 16.3% netral</li>
-        </ul>
+        st.markdown(f"""
+        <div style="background-color:#D0F2F2; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
+            <h4 style="color:#027373; margin-bottom:5px;">😊 Positif</h4>
+            <h2 style="color:#027373;">{pos_pct}%</h2>
+            <p style="font-size:13px; color:#555;">{positif:,} dari {total:,} ulasan</p>
         </div>
         """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown(f"""
+        <div style="background-color:#FFF4CC; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
+            <h4 style="color:#B88E00; margin-bottom:5px;">😐 Netral</h4>
+            <h2 style="color:#B88E00;">{net_pct}%</h2>
+            <p style="font-size:13px; color:#555;">{netral:,} dari {total:,} ulasan</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown(f"""
+        <div style="background-color:#FFD6D6; padding:20px 15px; border-radius:15px; box-shadow:2px 2px 10px rgba(0,0,0,0.05); text-align:center;">
+            <h4 style="color:#D40000; margin-bottom:5px;">😠 Negatif</h4>
+            <h2 style="color:#D40000;">{neg_pct}%</h2>
+            <p style="font-size:13px; color:#555;">{negatif:,} dari {total:,} ulasan</p>
+        </div>
+        """, unsafe_allow_html=True)
+
 
     st.markdown("---")
 
