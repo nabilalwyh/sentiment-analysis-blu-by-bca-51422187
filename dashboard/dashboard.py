@@ -312,11 +312,23 @@ if page == "Tentang blu":
 
 # ------------- PAGE 2: ANALISIS DATA ULASAN -------------
 elif page == "Analisis Data Ulasan":
-    st.title("📋 Apa Kata Mereka Tentang blu?")
+    st.title("🗣️ Apa Kata Mereka Tentang Aplikasi blu?")
 
+    st.markdown(
+        """
+        <p style="text-align: justify; font-size: 16px;">
+        Halaman ini menyajikan ulasan pengguna aplikasi <strong>blu by BCA Digital</strong> yang telah dianalisis secara mendalam. 
+        Kamu bisa mengatur tampilan ulasan dan melihat bagaimana persepsi publik terhadap aplikasi ini berdasarkan sentimen.
+        </p>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Load dan filter data
     data_path = "data/data_model.csv"
     data_model = load_data(data_path)
 
+    st.subheader("🎯 Filter Data Ulasan")
     jumlah_data = st.slider("Tampilkan berapa banyak ulasan?", min_value=5, max_value=50, value=10, step=5)
     rating_filter = st.multiselect("Filter berdasarkan rating:", options=[1, 2, 3, 4, 5], default=[1, 2, 3, 4, 5])
 
@@ -325,66 +337,70 @@ elif page == "Analisis Data Ulasan":
     filtered_data.insert(0, 'No', range(1, len(filtered_data) + 1))
     filtered_data = filtered_data.rename(columns={'content': 'Ulasan', 'score': 'Rating'})
 
+    st.subheader("📄 Ulasan Pengguna Terpilih")
     st.markdown(filtered_data[['No', 'Ulasan', 'Rating']].to_html(index=False, escape=False), unsafe_allow_html=True)
 
-    st.title("📊 Analisis Sentimen Ulasan")
+    st.markdown("---")
 
-    data_path = "data/ulasan_sentimen.csv"
+    # --- Distribusi Sentimen Umum
+    with st.expander("📊 Distribusi Sentimen Secara Umum", expanded=True):
+        col1, col2 = st.columns([2, 2])
+        with col1:
+            pie_sentimen("data/ulasan_sentimen.csv")
+        with col2:
+            st.markdown(
+                """
+                <div style="font-size: 16px; text-align: justify;">
+                Dari total <strong>17.533 ulasan</strong> yang dianalisis, diketahui bahwa:
+                <ul>
+                    <li><strong>48%</strong> positif</li>
+                    <li><strong>35.7%</strong> negatif</li>
+                    <li><strong>16.3%</strong> netral</li>
+                </ul>
+                Mayoritas pengguna merasa puas, namun sentimen negatif tetap perlu diperhatikan sebagai masukan pengembangan.
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-    # Distribusi Sentimen (Lexicon-based)
-    st.header("Distribusi Sentimen")
-    col1, col2 = st.columns([2,2])
-    with col1: 
-        pie_sentimen(data_path)  # pastikan fungsi ini sudah kamu definisikan
-    with col2:
-        st.write(
-            'Dari total 17.533 ulasan, sebanyak 48% bersentimen positif, 35.7% negatif, dan 16.3% netral. Ini menunjukkan mayoritas pengguna puas, namun ulasan negatif masih cukup signifikan.'
-        )
-
-    # Distribusi Sentimen per rating
-    st.header("Distribusi Sentimen per Rating")
-    tab1, tab2 = st.tabs(["Bar Chart", "Tabel"])
-
-    with tab1:
-        sentiment_table = rating_sentimen(data_path)  # pastikan fungsi ini tersedia
-
-    with tab2:
+    # --- Distribusi Sentimen Berdasarkan Rating
+    with st.expander("📈 Perbandingan Sentimen Berdasarkan Rating", expanded=False):
+        st.markdown("### 🔢 Data Tabel Sentimen per Rating")
+        sentiment_table = rating_sentimen("data/ulasan_sentimen.csv")
         if sentiment_table is not None:
-            col1, col2 = st.columns([2, 3])
+            st.dataframe(sentiment_table)
 
-            with col1:
-                st.dataframe(sentiment_table)
+            st.markdown(
+                """
+                <hr>
+                <p style="font-size: 15px;">
+                <strong>Keterangan:</strong><br>
+                - Kolom <code>-1</code>: Sentimen <strong>negatif</strong><br>
+                - Kolom <code>0</code>: Sentimen <strong>netral</strong><br>
+                - Kolom <code>1</code>: Sentimen <strong>positif</strong><br><br>
+                Setiap baris menunjukkan rating bintang (1-5). Terlihat bahwa:
+                <ul>
+                    <li>⭐ Bintang 5 dominan positif</li>
+                    <li>⭐ Bintang 1 dominan negatif</li>
+                    <li>⭐ Bintang 3 cenderung netral</li>
+                </ul>
+                </p>
+                """,
+                unsafe_allow_html=True
+            )
 
-            with col2:
-                st.markdown("""
-                ##### 📝 Penjelasan Tabel Sentimen per Rating
+    # --- WordCloud Visualisasi
+    with st.expander("☁️ Visualisasi Kata per Sentimen", expanded=False):
+        st.markdown("Berikut kata-kata paling sering muncul dalam ulasan berdasarkan jenis sentimennya:")
 
-                **Keterangan kolom:**
-                - Kolom `-1` → jumlah ulasan **negatif**
-                - Kolom `0` → jumlah ulasan **netral**
-                - Kolom `1` → jumlah ulasan **positif**
+        st.markdown("#### 😊 Kata Positif")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", 1, "Positif")
 
-                **Keterangan baris:**
-                - Setiap baris merepresentasikan **rating bintang (1-5)** dari pengguna.
+        st.markdown("#### 😐 Kata Netral")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", 0, "Netral")
 
-                **Insight:**
-                - ⭐ **Bintang 5**: Didominasi sentimen **positif**
-                - ⭐ **Bintang 1**: Didominasi sentimen **negatif**
-                - ⭐ **Bintang 3**: Cenderung **seimbang**
-                """, unsafe_allow_html=True)
-
-# WordCloud
-    st.header("Visualisasi Kata yang sering muncul")
-    tab1, tab2, tab3 = st.tabs(["Positif", "Netral", "Negatif"])
-
-    with tab1:
-        tampilkan_wordcloud(data_path, 1, "Positif")
-
-    with tab2:
-        tampilkan_wordcloud(data_path, 0, "Netral")
-
-    with tab3:
-        tampilkan_wordcloud(data_path, -1, "Negatif")
+        st.markdown("#### 😠 Kata Negatif")
+        tampilkan_wordcloud("data/ulasan_sentimen.csv", -1, "Negatif")
 
 
 # ------------- PAGE 3: ANALISIS DATA ULASAN -------------
