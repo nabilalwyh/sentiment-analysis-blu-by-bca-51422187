@@ -475,7 +475,7 @@ elif page == "Analisis Data Ulasan":
     # Footer
     tampilkan_footer()
 
-# ------------- PAGE 3: ANALISIS DATA ULASAN -------------
+# ------------- PAGE 3: PREDIKSI SENTIMEN -------------
 elif page == "Prediksi Sentimen":
     # Load model dan vectorizer
     model = joblib.load("model/model.joblib")
@@ -495,13 +495,17 @@ elif page == "Prediksi Sentimen":
     # ===== INPUT AREA =====
     with st.container():
         st.markdown("#### 💬 Masukkan Kalimat")
-        kalimat = st.text_area("Contoh: Aplikasi blu sangat membantu dan tampilannya bagus", height=100)
+        kalimat = st.text_area(
+            "Contoh: Aplikasi blu sangat membantu dan tampilannya bagus", 
+            height=100, 
+            placeholder="Tulis ulasan pengguna di sini..."
+        )
 
-        # Mapping hasil angka ke label, emoji, dan warna
+        # Mapping label ke tampilan
         label_mapping = {
-            1: ("Positif", "😊", "#D0F2F2"),
-            0: ("Netral", "😐", "#FFF4CC"),
-            -1: ("Negatif", "😠", "#FFD6D6")
+            "Positif": ("Positif", "😊", "#D0F2F2"),
+            "Netral": ("Netral", "😐", "#FFF4CC"),
+            "Negatif": ("Negatif", "😠", "#FFD6D6")
         }
 
         # Tombol Analisis
@@ -517,6 +521,9 @@ elif page == "Prediksi Sentimen":
                         <h2 style="margin:10px 0; color:#004AAD;">{emoji} {label}</h2>
                     </div>
                     """, unsafe_allow_html=True)
+                else:
+                    st.error(f"Hasil prediksi tidak dikenali: Kalimat terdeteksi {prediksi.lower()}")
             else:
                 st.warning("Kalimat tidak boleh kosong.")
+
 
