@@ -8,3 +8,4 @@ seaborn==0.13.2
 streamlit==1.12.0
 wordcloud==1.9.4
 altair==4.2.0
+plotly==5.21.0
