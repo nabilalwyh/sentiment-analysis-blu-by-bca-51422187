@@ -180,17 +180,11 @@ def rating_sentimen(data_path):
         return None
 
 # Fungsi untuk menampilkan wordcloud
-def tampilkan_wordcloud(data_path, sentiment_value, label=""):
+def tampilkan_wordcloud(data_path, sentiment_value):
     if os.path.exists(data_path):
         data_model = pd.read_csv(data_path)
 
-        st.subheader(f"WordCloud Sentimen {label}")
-
         teks = " ".join(data_model[data_model['sentiment'] == sentiment_value]['text_akhir'].dropna())
-
-        if not teks.strip():
-            st.warning(f"Tidak ada ulasan dengan sentimen {label.lower()}.")
-            return
 
         wordcloud = WordCloud(
             width=800,
