@@ -505,7 +505,7 @@ elif page == "Prediksi Sentimen":
         }
 
         # Tombol Analisis
-        if st.button("🔎 Analisis Sentimen", use_container_width=True):
+        if st.button("🔎 Analisis Sentimen"):
             if kalimat.strip() != "":
                 prediksi = analyzer.proses_teks_input(kalimat)
 
