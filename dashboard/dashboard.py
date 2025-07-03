@@ -514,4 +514,5 @@ elif page == "Prediksi Sentimen":
         else:
             st.warning("Kalimat tidak boleh kosong.")
 
-    
+    # Footer
+    tampilkan_footer()
