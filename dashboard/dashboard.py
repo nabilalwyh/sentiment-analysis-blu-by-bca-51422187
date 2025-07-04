@@ -334,12 +334,12 @@ elif page == "Analisis Data Ulasan":
     """, unsafe_allow_html=True)
 
     # ===== LOAD DAN RINGKASAN SENTIMEN =====
-    df_sentimen = pd.read_csv("data/ulasan_sentimen.csv")
+    df_sentimen = pd.read_csv("data/dataset_hybrid_sentimen.csv")
 
     total = len(df_sentimen)
-    positif = len(df_sentimen[df_sentimen['sentiment'] == 1])
-    netral = len(df_sentimen[df_sentimen['sentiment'] == 0])
-    negatif = len(df_sentimen[df_sentimen['sentiment'] == -1])
+    positif = len(df_sentimen[df_sentimen['label_ml'] == 'positive'])
+    netral = len(df_sentimen[df_sentimen['label_ml'] == 'neutral'])
+    negatif = len(df_sentimen[df_sentimen['label_ml'] == 'negative'])
 
     pos_pct = round((positif / total) * 100, 1)
     net_pct = round((netral / total) * 100, 1)
