@@ -226,7 +226,7 @@ with st.sidebar:
     st.image("image/blu.png")  # Ganti path sesuai lokasi logo kamu
 
     # Navigasi di sidebar
-    page = st.selectbox("Navigasi", ["Tentang blu", "Analisis Data Ulasan", "Prediksi Sentimen"])
+    page = st.selectbox("Navigasi", ["Tentang blu", "Analisis Data Ulasan", "Klasifikasi Sentimen"])
 
 # ------------- PAGE 1: TENTANG BLU -------------
 if page == "Tentang blu":
@@ -476,15 +476,15 @@ elif page == "Analisis Data Ulasan":
     tampilkan_footer()
 
 # ------------- PAGE 3: PREDIKSI SENTIMEN -------------
-elif page == "Prediksi Sentimen":
+elif page == "Klasifikasi Sentimen":
     model = joblib.load("model/model.joblib")
     vectorizer = joblib.load("model/tfidf_vectorizer.joblib")
     analyzer = SentimentAnalyzer(vectorizer, model)
 
     st.markdown("""
     <div style="text-align:center; padding: 10px 0 25px 0;">
-        <h2 style="color:#004AAD;">🔍 Prediksi Sentimen</h2>
-        <p style="font-size:16px;">Masukkan kalimat ulasan pengguna untuk memprediksi sentimennya secara otomatis.</p>
+        <h2 style="color:#004AAD;">🔍 Klasifikasi Sentimen</h2>
+        <p style="font-size:16px;">Masukkan kalimat ulasan pengguna untuk mengetahui klasifikasi sentimennya secara otomatis.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -505,7 +505,7 @@ elif page == "Prediksi Sentimen":
                 label, emoji, warna = label_mapping[hasil]
                 st.markdown(f"""
                 <div style="background-color:{warna}; padding:20px; border-radius:12px; margin-top:20px; text-align:center;">
-                    <h3 style="color:#333;">Hasil Prediksi Sentimen</h3>
+                    <h3 style="color:#333;">Hasil Klasifikasi Sentimen</h3>
                     <h2 style="margin:10px 0; color:#004AAD;">{emoji} {label}</h2>
                 </div>
                 """, unsafe_allow_html=True)
